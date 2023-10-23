@@ -4,7 +4,7 @@ import axios from 'axios';
 
 type Props = {}
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
     const [email, setEmail ] = useState('');
     const [password, setPassword ] = useState('');
     let debounceTimeout: NodeJS.Timeout | null = null;
@@ -66,4 +66,4 @@ const page = (props: Props) => {
   )
 }
 
-export default page
+export default Page
