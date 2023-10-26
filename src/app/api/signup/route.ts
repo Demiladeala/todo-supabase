@@ -13,3 +13,9 @@ const body = await req.json() as RequestParams
     const result = await server.auth.signUp({email: body.email, password: body.password})
     return NextResponse.json(result)
 }
+
+
+
+export async function GET(req: NextRequest) {
+        return NextResponse.json({data: 'fetched with react query'})
+    }

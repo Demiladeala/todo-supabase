@@ -2,29 +2,50 @@
 import React, { ChangeEvent, MouseEventHandler, useState } from 'react'
 import axios from 'axios';
 import { useFormState } from '../utils/hooks';
-
+import {useQuery, useMutation, useQueryClient } from 'react-query'
+ 
 type Props = {}
 
+
+
 const Signup = (props: Props) => {
+    const queryClient = useQueryClient();
     const [ state, setProperty ] = useFormState({
         email: "",
         password: "",
-    })
+    });
 
-    const handleInputChange = (
-        event:React.ChangeEvent<HTMLInputElement>) => 
+    const fetchApiResponsej = async () => {
+        const response = await axios.get("/api/signup");
+        return response.data;   
+
+    }
+
+    //const {isLoading, error, data} = useQuery('fetchResponse', fetchApiResponsej);
+
+    const mutation = useMutation(signupformData => {
+        return axios.post('/api/signup', signupformData)
+      }, {
+        onSuccess: (data) => {
+            queryClient.setQueryData(["signup"], data)
+        }
+      })
+
+    const handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => 
     {
         setProperty(event?.target.name, event?.target?.value);
     }
     
       const handleSubmit =  async (e: React.FormEvent) => {
         e.preventDefault();
-        const user = {
+        const user = {  
             email: state.email,
             password: state.password,
         }
         try {
-            const response = await axios.post("/api/signup", user);
+            //const response = await axios.post("/api/signup", user);
+            mutation.mutate(user as any)
+
         } catch (error) {
             
         }
@@ -60,6 +81,8 @@ const Signup = (props: Props) => {
                     type='submit'>Continue</button>
                 </div>
             </form>
+            {mutation.isLoading && <>Saving in progress</>}
+            {mutation.isSuccess && <>Sign up was successfull</>}
        </div>
     </div>
   )
