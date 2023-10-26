@@ -12,7 +12,7 @@ export default function Home() {
           <input 
           type="text"
           placeholder="Enter your new to-do" 
-          className="w-full outline-none border border-gray-100 mt-3 rounded-lg p-3 text-sm shadow-sm" />
+          className="w-full bg-transparent outline-none border border-gray-100 mt-3 rounded-lg p-3 text-sm shadow-sm" />
 
           <div>
             <button
