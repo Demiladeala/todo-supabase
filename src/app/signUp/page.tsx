@@ -5,7 +5,7 @@ type Props = {}
 
 const page = (props: Props) => {
   return (
-    <div className='bg-white'>
+    <div className='bg-white w-full h-screen'>
       <Signup />
     </div>
   )
