@@ -25,11 +25,11 @@ export default function Home() {
 
       {/* TODOS CARD */}
       <div className="bg-gray-100 z-10 relative shadow-2xl rounded-lg p-5 w-[85%] md:w-[60%] h-[70vh] mx-auto overflow-y-scroll">
-        <h3 className="font-bold text-lg my-4 ml-2">To-do(s)</h3>
+        <h3 className="font-bold text-lg my-4 ml-2 text-black">To-do(s)</h3>
         <div className="bg-white my-5 shadow-2xl p-3 md:w-[60%] rounded-2xl">
           <div className="flex gap-4 items-center">
           <input type="checkbox" defaultChecked={false} className="checkbox checkbox-sm" />
-          <p>Add stuff to Todo</p>
+          <p className="text-black">Add stuff to Todo</p>
           </div>
           <p className="mt-4 ml-9 text-sm badge badge-warning badge-outline">Pending</p>
         </div>  
@@ -37,7 +37,7 @@ export default function Home() {
         <div className="bg-white my-5 shadow-2xl p-3 md:w-[60%] rounded-2xl">
           <div className="flex gap-4 items-center">
           <input type="checkbox" defaultChecked={false} className="checkbox checkbox-sm" />
-          <p>Add stuff to Todo</p>
+          <p className="text-black">Add stuff to Todo</p>
           </div>
           <p className="mt-4 ml-9 text-sm badge badge-warning badge-outline">Pending</p>
         </div>  
@@ -45,7 +45,7 @@ export default function Home() {
         <div className="bg-white my-5 shadow-2xl p-3 md:w-[60%] rounded-2xl">
           <div className="flex gap-4 items-center">
           <input type="checkbox" defaultChecked={false} className="checkbox checkbox-sm" />
-          <p>Add stuff to Todo</p>
+          <p className="text-black">Add stuff to Todo</p>
           </div>
           <p className="mt-4 ml-9 text-sm badge badge-warning badge-outline">Pending</p>
         </div>
@@ -53,7 +53,7 @@ export default function Home() {
         <div className="bg-white my-5 shadow-2xl p-3 md:w-[60%] rounded-2xl">
           <div className="flex gap-4 items-center">
           <input type="checkbox" defaultChecked={false} className="checkbox checkbox-sm" />
-          <p>Add stuff to Todo</p>
+          <p className="text-black">Add stuff to Todo</p>
           </div>
           <p className="mt-4 ml-9 text-sm badge badge-warning badge-outline">Pending</p>
         </div>
@@ -61,7 +61,7 @@ export default function Home() {
         <div className="bg-white my-5 shadow-2xl p-3 md:w-[60%] rounded-2xl">
           <div className="flex gap-4 items-center">
           <input type="checkbox" defaultChecked={false} className="checkbox checkbox-sm" />
-          <p>Add stuff to Todo</p>
+          <p className="text-black">Add stuff to Todo</p>
           </div>
           <p className="mt-4 ml-9 text-sm badge badge-warning badge-outline">Pending</p>
         </div>
