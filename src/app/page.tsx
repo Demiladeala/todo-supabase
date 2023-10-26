@@ -24,7 +24,7 @@ export default function Home() {
       {/* CREATE TODO CARD */}
 
       {/* TODOS CARD */}
-      <div className="bg-gray-100 z-10 relative shadow-2xl bg-opacity-90 rounded-lg p-5 w-[85%] md:w-[60%] h-[70vh] mx-auto overflow-y-scroll">
+      <div className="bg-gray-100 z-10 relative shadow-2xl rounded-lg p-5 w-[85%] md:w-[60%] h-[70vh] mx-auto overflow-y-scroll">
         <h3 className="font-bold text-lg my-4 ml-2">To-do(s)</h3>
         <div className="bg-white my-5 shadow-2xl p-3 md:w-[60%] rounded-2xl">
           <div className="flex gap-4 items-center">
