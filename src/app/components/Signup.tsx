@@ -1,5 +1,4 @@
 "use client";
-import React, { ChangeEvent, MouseEventHandler, useState } from 'react'
 import axios from 'axios';
 import { useFormState } from '../utils/hooks';
 import {useQuery, useMutation, useQueryClient } from 'react-query'
@@ -11,15 +10,16 @@ type Props = {}
 const Signup = (props: Props) => {
     const queryClient = useQueryClient();
     const [ state, setProperty ] = useFormState({
+      name: "",
         email: "",
         password: "",
     });
 
-    const fetchApiResponsej = async () => {
-        const response = await axios.get("/api/signup");
-        return response.data;   
+    // const fetchApiResponsej = async () => {
+    //     const response = await axios.get("/api/signup");
+    //     return response.data;   
 
-    }
+    // }
 
     //const {isLoading, error, data} = useQuery('fetchResponse', fetchApiResponsej);
 
@@ -38,7 +38,8 @@ const Signup = (props: Props) => {
     
       const handleSubmit =  async (e: React.FormEvent) => {
         e.preventDefault();
-        const user = {  
+        const user = {
+            name: state.name,  
             email: state.email,
             password: state.password,
         }
@@ -56,7 +57,17 @@ const Signup = (props: Props) => {
             <h1 className='font-semibold text-2xl text-orange-600 text-center '>Create Account</h1>
             <p className='mt-4 text-center '>Sign up to <span className='text-orange-400'>Todos</span></p>
        
-            <form className='px-5' onSubmit={handleSubmit}>
+            <form className='px-5'>
+
+              <p className='font-semibold mt-3'>Name</p>
+                <input
+                onChange={handleInputChange} 
+                type='text'
+                name='name'
+                value={state.name}    
+                placeholder='Enter your name'
+                className='outline-none border border-gray-200 w-full rounded my-2 p-2 text-sm' />
+
                 <p className='font-semibold mt-3'>Email</p>
                 <input
                 onChange={handleInputChange} 
@@ -74,9 +85,14 @@ const Signup = (props: Props) => {
                 onChange={handleInputChange} 
                 placeholder='Enter your password'
                 className='outline-none border border-gray-200 w-full rounded my-2 p-2 text-sm' />
+
+                <p
+                className='text-sm text-gray-800 flex gap-1 justify-end'
+                >Have an account already?  <span className='text-orange-600 hover:underline'><a href="/login">Login</a></span></p>
         
                 <div>
                     <button
+                    onClick={handleSubmit}
                     className='py-2 px-5 bg-orange-600 w-full mt-4 cursor-pointer hover:bg-opacity-75' 
                     type='submit'>Continue</button>
                 </div>

@@ -1,16 +1,32 @@
 import {NextRequest, NextResponse} from 'next/server'
-import {createRouteHandlerClient} from "@supabase/auth-helpers-nextjs";
-import {cookies} from 'next/headers'
+import dbClient from '@/app/utils/dbClient'
+import server from '@/app/utils/supabaseConnection';
 
 type RequestParams = {
-    email: string, password: string
+   name:string, email: string, password: string
 }
 
 export async function POST(req: NextRequest) {
 const body = await req.json() as RequestParams
-    const server  = createRouteHandlerClient({cookies},{ supabaseUrl :process.env.NEXT_PUBLIC_SUPABASE_URL})
+
+    // const todoResult = await dbClient.todos.create({
+    //     data:  {
+    //          title: 'Test Todo',
+    //          content: 'We are tesing the saving of todos', 
+    //          isDelete: false,
+    //          userId: userResult.id,
+    //     }
+    // })
 
     const result = await server.auth.signUp({email: body.email, password: body.password})
+        
+    const userResult = await dbClient.user.create({
+        data:  {
+           email: result.data.user?.email!,
+            name: body.name,
+        }
+    })
+
     return NextResponse.json(result)
 }
 
@@ -18,4 +34,4 @@ const body = await req.json() as RequestParams
 
 export async function GET(req: NextRequest) {
         return NextResponse.json({data: 'fetched with react query'})
-    }
+}

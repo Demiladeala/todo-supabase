@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 type initialStateType = {
+    name?: string,
     email: string;
     password: string;
 }

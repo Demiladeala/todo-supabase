@@ -4,13 +4,3 @@
 body{
     background-color: white;
 }
-.hero-container{
-    background-image: url('/wave-haikei\ \(1\).svg');
-    height: 100%;
-    background-repeat: no-repeat;
-}
-@media (max-width:650px) {
- .hero-container{
-    background-image: url('/wave-haikei-mobile.svg');
- }
-}
