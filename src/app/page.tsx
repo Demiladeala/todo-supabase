@@ -9,12 +9,12 @@ export default function Home() {
     <div className="bg-[#f7f7f7] relative w-full min-h-screen">
     
             {/* BACKGGROUND OVERLAY */}
-      <div className="relative z-10 w-[98%] sm:w-[98.9%] mt-2 mx-auto h-[43vh]">
+      <div className="relative z-10 w-full mt-2 mx-auto h-[43vh]">
         <Image src={backgroundImage} alt="background" 
-        className="absolute top-0 left-0 w-full h-full object-cover bg-center bg-no-repeat rounded-2xl">
+        className="absolute top-0 left-0 w-full h-full object-cover bg-center bg-no-repeat rounded-br-2xl rounded-bl-2xl">
         </Image>
         <div 
-        className="absolute top-0 left-0 w-full h-full rounded-2xl 
+        className="absolute top-0 left-0 w-full h-full rounded-br-2xl rounded-bl-2xl 
         bg-gradient-to-r from-orange-600 to-gray-100 opacity-80"></div>
       </div>
 
