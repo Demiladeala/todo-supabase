@@ -20,7 +20,6 @@ model User {
 
 model Todos {
   id        Int     @id @default(autoincrement())
-  title     String
   content   String?
   isDelete Boolean @default(false)
   user    User    @relation(fields: [userId], references: [id])

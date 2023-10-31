@@ -27,7 +27,6 @@ export async function POST(req: NextRequest) {
 // Insert the userId into the Todos table as the user creating the todo.
     const todoResult = await dbClient.todos.create({
         data: {
-            title: body.title,
             content: body.content,
             isDelete: false,
             userId: user?.id!
