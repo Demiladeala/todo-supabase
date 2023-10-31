@@ -24,15 +24,19 @@ export async function POST(req: NextRequest) {
         })
         console.log(user);
 
-// Insert the userId into the Todos table as the user creating the todo.
-    const todoResult = await dbClient.todos.create({
-        data: {
-            content: body.content,
-            isDelete: false,
-            userId: user?.id!
-        }
-    })
-    console.log(todoResult);
+        const userId = user?.id
 
-    return NextResponse.json(todoResult);
+// Insert the userId into the Todos table as the user creating the todo.
+    if(userId !== undefined) {
+        const todoResult = await dbClient.todos.create({
+            data: {
+                content: body.content,
+                isDelete: false,
+                userId: userId,
+            }
+        })
+        console.log(todoResult);
+        return NextResponse.json(todoResult);
+    }
+
 }
