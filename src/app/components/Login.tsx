@@ -54,7 +54,7 @@ const Login = (props: Props) => {
   }
 
   return (
-    <div className='w-full bg-center bg-no-repeat '>
+    <div className='bg-white w-full bg-center bg-no-repeat '>
        <div className='w-[90%] md:w-[50%] lg:w-[40%] mt-20 mx-auto rounded-xl border border-gray-300 py-6 pb-12'>
             <h1 className='font-semibold text-2xl text-orange-600 text-center '>Sign In</h1>
             <p className='mt-4 text-center '>Continue with <span className='text-orange-400'>Todos</span></p>
