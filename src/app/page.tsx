@@ -1,8 +1,52 @@
+"use client";
+import { useState, useEffect } from 'react';
 import Image from "next/image"
 import backgroundImage from '../../public/mountain.avif'
+import axios from "axios"
+import { useQuery, useMutation, useQueryClient } from "react-query"
+import { setTimeout } from 'timers';
+
+interface Todo {
+  id: number;
+  content: string;
+  isDelete: boolean;
+}
+
 
 export default function Home() {
-  
+  const queryClient = useQueryClient();
+  const [todoContent, setTodoContent] = useState("");
+
+  const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) => 
+  {
+    setTimeout(() => 
+    setTodoContent(e.target.value),
+    2000
+    )
+  }
+
+  const mutation: any = useMutation({
+    mutationFn: (newTodo) => {
+      return axios.post('/api/todos', newTodo)
+    }
+  })
+
+  const handleSubmit =  async () => {
+    const todo = {
+      content: todoContent
+    }
+    mutation.mutate(todo as any)
+    setTodoContent("");
+    fetchTodoList();
+    queryClient.invalidateQueries('todos');
+  }
+
+  const fetchTodoList = async () => {
+    const response = await axios.get("/api/todos");
+    return response.data; 
+  }
+
+  const { isLoading, isError, data, error } = useQuery<Todo[]>('todos', fetchTodoList)
 
   return (
     <>
@@ -26,64 +70,29 @@ export default function Home() {
               {/* TODO CONTENT */}
           <div className="relative w-full bg-white rounded-xl px-3 py-2 md:px-8 mt-5 flex justify-between">
             <input type="text"
+            onChange={handleInputChange}
             placeholder="Start Typing..."
-            className="outline-none  text-sm placeholder-gray-500 font-semibold" />
+            className="outline-none  text-sm placeholder-gray-500 font-semibold"
+            />
 
-            <button className="right-5 bg-orange-600 rounded-lg text-white px-3 py-[5px] text-sm ">
+            <button 
+            onClick={handleSubmit}
+            className="right-5 bg-orange-600 rounded-lg text-white px-3 py-[5px] text-sm ">
               Create
             </button>
           </div>
 
-              {/*TODO DISPLAY */}
+          {/*TODO DISPLAY */}
           <div className="relative w-full bg-white rounded-xl shadow-2xl px-3 py-2 md:px-8 mt-8 flex flex-col">
-            <div>
-              <div className="relative mt-2 flex items-center gap-4">
-                <input type="checkbox"  className="checkbox checkbox-sm" />
-                <p className="font-medium">Check the Garage</p>
+            {data && data.map((todo) => (
+              <div key={todo.id}> {/* You should use a unique key for each todo */}
+                <div className="relative mt-2 flex items-center gap-4">
+                  <input type="checkbox" className="checkbox checkbox-sm" />
+                  <p className="font-medium">{todo.content}</p>
+                </div>
+                <div className="h-px w-full bg-gray-100 mt-4 mb-2"></div>
               </div>
-              <div className="h-px w-full bg-gray-100 mt-4 mb-2"></div>
-            </div>
-
-            <div>
-              <div className="relative mt-2 flex items-center gap-4">
-                <input type="checkbox"  className="checkbox checkbox-sm" />
-                <p className="font-medium">Finish Working on a Project</p>
-              </div>
-              <div className="h-px w-full bg-gray-100 mt-4 mb-2"></div>
-            </div>
-
-            <div>
-              <div className="relative mt-2 flex items-center gap-4">
-                <input type="checkbox"  className="checkbox checkbox-sm" />
-                <p className="font-medium">Exercise before I sleep</p>
-              </div>
-              <div className="h-px w-full bg-gray-100 mt-4 mb-2"></div>
-            </div>
-
-            <div>
-              <div className="relative mt-2 flex items-center gap-4">
-                <input type="checkbox"  className="checkbox checkbox-sm" />
-                <p className="font-medium">Check the Garage</p>
-              </div>
-              <div className="h-px w-full bg-gray-100 mt-4 mb-2"></div>
-            </div>
-
-            <div>
-              <div className="relative mt-2 flex items-center gap-4">
-                <input type="checkbox"  className="checkbox checkbox-sm" />
-                <p className="font-medium">Finish Working on a Project</p>
-              </div>
-              <div className="h-px w-full bg-gray-100 mt-4 mb-2"></div>
-            </div>
-
-            <div>
-              <div className="relative mt-2 flex items-center gap-4">
-                <input type="checkbox"  className="checkbox checkbox-sm" />
-                <p className="font-medium">Exercise before I sleep</p>
-              </div>
-              <div className="h-px w-full bg-gray-100 mt-4 mb-2"></div>
-            </div>
-
+            ))}
           </div>
         </div>
       </div>
